@@ -1,19 +1,6 @@
-
-
 <div class="card" style="width: 18rem">
   <div class="card-header text-center">Login</div>
   <div class="card-body">
-<<<<<<< Updated upstream
-    <div class="input-group">
-      <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-      <input class="form-control" type="text" name="" id="" />
-    </div>
-    <div class="input-group">
-      <input class="form-control" type="text" name="" id="" />
-      <span class="input-group-text"><i class="bi bi-eye-slash-fill"></i></span>
-    </div>
-    <button class="btn btn-success w-100">Login</button>
-=======
 
     <ul *ngIf="loginForm.dirty  && loginForm.touched">
       <li *ngIf="!loginForm.get('email')?.valid">Email is required</li>
@@ -25,6 +12,7 @@
         <span class="input-group-text"
           ><i class="bi bi-envelope-fill"></i
         ></span>
+
         <input
           class="form-control"
           type="text"
@@ -59,8 +47,9 @@
         Login
       </button>
     </form>
->>>>>>> Stashed changes
+
   </div>
+
   <div class="card-footer">
     <a class="link" href="auth/register">Register</a>
   </div>

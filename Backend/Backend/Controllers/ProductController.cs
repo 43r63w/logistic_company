@@ -17,7 +17,7 @@ namespace Backend.Controllers
             _productService = productService;
         }
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<List<DetailInfoAboutProductDTO>>> GetProducts()
         {
             var result = await _productService.GetProductsAsync();

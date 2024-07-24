@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: false,
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  public isShowPassword = false;
+  public loginForm!: FormGroup;
 
-<<<<<<< Updated upstream
-=======
   constructor(
     private _formBuilder: FormBuilder,
     private _authService: AuthService
@@ -20,11 +22,9 @@ export class LoginComponent {
     });
   }
 
-
-
   login(){
     
   }
 
->>>>>>> Stashed changes
+
 }
