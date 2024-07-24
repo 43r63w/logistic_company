@@ -1,0 +1,21 @@
+.card{
+    margin-left: 800px;
+    margin-top: 150px;
+}
+
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body > *{
+    
+    margin-bottom: 15px;
+}
+
+.card-footer{
+        a{
+            margin-left: 95px;
+        }
+}
