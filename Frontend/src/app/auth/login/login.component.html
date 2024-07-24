@@ -1,18 +1,23 @@
-
-
 <div class="card" style="width: 18rem">
   <div class="card-header text-center">Login</div>
   <div class="card-body">
-    <div class="input-group">
-      <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-      <input class="form-control" type="text" name="" id="" />
-    </div>
-    <div class="input-group">
-      <input class="form-control" type="text" name="" id="" />
-      <span class="input-group-text"><i class="bi bi-eye-slash-fill"></i></span>
-    </div>
-    <button class="btn btn-success w-100">Login</button>
+    <form [formGroup]="loginForm">
+      <div class="input-group">
+        <span class="input-group-text"
+          ><i class="bi bi-envelope-fill"></i
+        ></span>
+        <input class="form-control" type="text"  formControlName="email" placeholder="Email" />
+      </div>
+      <div class="input-group">
+        <input class="form-control" [type]="isShowPassword ? 'text':'password'" formControlName="password" placeholder="Password"/>
+        <button type="button" (click)="isShowPassword = !isShowPassword" class="input-group-text"
+          ><i [ngClass]="isShowPassword ? 'bi bi-eye-fill':'bi bi-eye-slash-fill'"></i
+        ></button>
+      </div>
+      <button class="btn btn-success w-100">Login</button>
+    </form>
   </div>
+
   <div class="card-footer">
     <a class="link" href="auth/register">Register</a>
   </div>
