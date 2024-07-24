@@ -2,13 +2,8 @@ using Application.DTOS;
 using Application.DTOS.AuthDTO;
 using Application.DTOS.Customer;
 using Application.IServices;
-using AutoMapper.Configuration.Annotations;
-using Infrastructure.IGenericRepository;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging.Abstractions;
-using Newtonsoft.Json;
 
 namespace Backend.Controllers
 {
@@ -25,20 +20,21 @@ namespace Backend.Controllers
             _contextAccessor = contextAccessor;
         }
 
-        [HttpPost("Register")]
+
+        [HttpPost("register-user")]
         public async Task<ActionResult<GeneralResponseDTO>> Register(RegisterDTO registerDto)
         {
             var result = await _userService.RegisterAsync(registerDto);
             return Ok(result);
         }
-        [HttpPost("Login")]
+        [HttpPost("login-user")]
         public async Task<ActionResult<GeneralResponseDTO>> Login(LoginDTO loginDto)
         {
             var result = await _userService.LoginAsync(loginDto);
             _contextAccessor.HttpContext.Response.Cookies.Append("token", result.Token);
             return Ok(result);
         }
-        [HttpGet("GetInfoAboutProfileCustomer")]
+        [HttpGet("get-info-about-customer")]
         [Authorize]
         public async Task<ActionResult<CustomerDTO>> GetInfoAboutProfileCustomer(string email)
         {
@@ -46,7 +42,7 @@ namespace Backend.Controllers
             return Ok(result);
         }
 
-        [HttpPost("BanCustomer")]
+        [HttpPost("ban-customer")]
         [Authorize(policy: "EmployeePolicy")]
         public async Task<ActionResult<GeneralResponseDTO>> BanCustomer(string email)
         {
@@ -54,7 +50,7 @@ namespace Backend.Controllers
             return Ok(result);
         }
         
-        [HttpPost("UnbanCustomer")]
+        [HttpPost("unban-customer")]
         [Authorize(policy: "EmployeePolicy")]
         public async Task<ActionResult<GeneralResponseDTO>> UnbanCustomer(int id)
         {

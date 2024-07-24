@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  backend:
+    image: ${DOCKER_REGISTRY-}backend
+    build:
+      context: .
+      dockerfile: Backend/Dockerfile
+  logistic.database:
+   image: postgres:latest
+   container_name: logistic.database
+   environment:
+    - POSTGRES_DB=logistic
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=2105
+   volumes:
+    - ./.containers/logistic-db:/var/lib/postgresql/data 
+   ports:
+    - 5432:5432
+  
+ 
+
+
+
+
+
+
+  
+  

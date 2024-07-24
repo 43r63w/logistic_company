@@ -15,7 +15,7 @@ namespace Infrastructure.ServiceExtension
         {
             return services.AddDbContext<ApplicationDbContext>(options =>
                          {
-                             options.UseNpgsql(configuration.GetConnectionString("DefaultDbConnection"));
+                             options.UseNpgsql(configuration.GetConnectionString("DockerDbConnection"));
                          });
         }
 
