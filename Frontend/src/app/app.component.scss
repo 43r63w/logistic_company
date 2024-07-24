@@ -1,0 +1,21 @@
+.auth{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.auth > *{
+    margin-right: 15px;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.d-flex.flex-column.align-items-center.align-items-sm-start.px-3.pt-2.text-white.min-vh-100{
+    border-right: 1px solid white;
+    width: 250px;
+}
