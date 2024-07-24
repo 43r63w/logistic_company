@@ -208,5 +208,16 @@ namespace Infrastructure.Context
 
         }
 
+        public static void SeedUser( this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id= 1,
+                CustomerId =1,
+
+
+            });
+        }
+
     }
 }
