@@ -31,7 +31,6 @@ namespace Backend.Controllers
         public async Task<ActionResult<GeneralResponseDTO>> Login(LoginDTO loginDto)
         {
             var result = await _userService.LoginAsync(loginDto);
-            _contextAccessor.HttpContext.Response.Cookies.Append("token", result.Token);
             return Ok(result);
         }
         [HttpGet("get-info-about-customer")]
@@ -50,7 +49,7 @@ namespace Backend.Controllers
             return Ok(result);
         }
         
-        [HttpPost("unban-customer")]
+        [HttpPost("u")]
         [Authorize(policy: "EmployeePolicy")]
         public async Task<ActionResult<GeneralResponseDTO>> UnbanCustomer(int id)
         {
