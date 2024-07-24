@@ -8,4 +8,23 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+<<<<<<< Updated upstream
+=======
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _authService: AuthService
+  ) {
+    this.loginForm = _formBuilder.group({
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', Validators.required],
+    });
+  }
+
+
+
+  login(){
+    
+  }
+
+>>>>>>> Stashed changes
 }

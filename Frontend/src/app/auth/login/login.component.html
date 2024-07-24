@@ -3,6 +3,7 @@
 <div class="card" style="width: 18rem">
   <div class="card-header text-center">Login</div>
   <div class="card-body">
+<<<<<<< Updated upstream
     <div class="input-group">
       <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
       <input class="form-control" type="text" name="" id="" />
@@ -12,6 +13,53 @@
       <span class="input-group-text"><i class="bi bi-eye-slash-fill"></i></span>
     </div>
     <button class="btn btn-success w-100">Login</button>
+=======
+
+    <ul *ngIf="loginForm.dirty  && loginForm.touched">
+      <li *ngIf="!loginForm.get('email')?.valid">Email is required</li>
+      <li *ngIf="!loginForm.get('password')?.valid">Password is required</li>
+    </ul>
+    
+    <form [formGroup]="loginForm">
+      <div class="input-group">
+        <span class="input-group-text"
+          ><i class="bi bi-envelope-fill"></i
+        ></span>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="email"
+          placeholder="Email"
+        />
+      </div>
+      <div class="input-group">
+        <input
+          class="form-control"
+          [type]="isShowPassword ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="Password"
+        />
+        <button
+          type="button"
+          (click)="isShowPassword = !isShowPassword"
+          class="input-group-text"
+        >
+          <i
+            [ngClass]="
+              isShowPassword ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill'
+            "
+          ></i>
+        </button>
+      </div>
+      <button
+        class="btn btn-success w-100"
+        (click)="login()"
+        [disabled]="loginForm.invalid"
+      >
+        Login
+      </button>
+    </form>
+>>>>>>> Stashed changes
   </div>
   <div class="card-footer">
     <a class="link" href="auth/register">Register</a>
