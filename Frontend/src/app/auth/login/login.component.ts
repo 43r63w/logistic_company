@@ -22,9 +22,10 @@ export class LoginComponent {
     });
   }
 
-  login(){
-    
-  }
+  login() {}
+
+
+
 
 
 }
