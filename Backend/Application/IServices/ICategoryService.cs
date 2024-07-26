@@ -1,12 +1,12 @@
 ﻿
 
-using Application.DTOS;
-using Application.DTOS.Category;
-
-
 
 namespace Application.IServices
 {
+
+    using Application.DTOS;
+    using Application.DTOS.Category;
+
     public interface ICategoryService
     {
         Task<ICollection<CategoryDTO>> GetCategoriesAsync();
