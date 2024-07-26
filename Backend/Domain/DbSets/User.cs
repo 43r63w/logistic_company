@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices.ObjectiveC;
 
 
-
 namespace Domain.DbSets
 {
     [Table("users")]

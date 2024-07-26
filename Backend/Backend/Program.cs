@@ -80,6 +80,10 @@ app.UseMiddleware<ExceptionHandlerMiddlware>();
 
 app.UseHttpsRedirection();
 
+app.UseCors(policy =>
+{
+    policy.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+});
 
 app.UseAuthentication();
 app.UseAuthorization();

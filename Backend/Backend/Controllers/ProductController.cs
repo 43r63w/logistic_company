@@ -16,12 +16,13 @@ namespace Backend.Controllers
         {
             _productService = productService;
         }
+
         [HttpGet]
         //[Authorize]
         public async Task<ActionResult<List<DetailInfoAboutProductDTO>>> GetProducts()
         {
             var result = await _productService.GetProductsAsync();
-            return Ok(result.OrderBy(e => e.Id));
+            return Ok("work");
         }
 
         [HttpGet("{id}")]

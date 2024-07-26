@@ -1,6 +1,6 @@
 ﻿using Application.Configuring.Jwt;
+using Application.Configuring.Profile;
 using Application.IServices;
-using Application.Profile;
 using Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 

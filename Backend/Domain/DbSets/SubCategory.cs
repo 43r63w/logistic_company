@@ -5,7 +5,7 @@ using System.Security;
 
 namespace Domain.DbSets
 {
-    [Table("subs_category")]
+    [Table("sub_categories")]
     public class SubCategory
     {
      

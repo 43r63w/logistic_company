@@ -19,22 +19,20 @@ namespace Backend.Controllers
             _userService = userService;
             _contextAccessor = contextAccessor;
         }
-
-
         [HttpPost("register-user")]
-        public async Task<ActionResult<GeneralResponseDTO>> Register(RegisterDTO registerDto)
+        public async Task<ActionResult<GeneralResponseDTO>> RegisterAsync(RegisterDTO registerDto)
         {
             var result = await _userService.RegisterAsync(registerDto);
             return Ok(result);
         }
         [HttpPost("login-user")]
-        public async Task<ActionResult<GeneralResponseDTO>> Login(LoginDTO loginDto)
+        public async Task<ActionResult<LoginResponseDTO>> Login(LoginDTO loginDto)
         {
             var result = await _userService.LoginAsync(loginDto);
             return Ok(result);
         }
         [HttpGet("get-info-about-customer")]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<CustomerDTO>> GetInfoAboutProfileCustomer(string email)
         {
             var result = await _userService.CheckProfileAsync(email);

@@ -17,14 +17,23 @@ namespace Application.Configuring.Jwt
         }
 
 
-        public string GenerateToken(string email, string role)
-        {
+        public string GenerateToken(UserDTO userDTO)
+        {        
 
-            
             var claims = new List<Claim>
-            {
-                new Claim("Email", email),
-                new Claim("Role", role),
+            {        
+                new Claim("UserId",userDTO.Id.ToString()),
+                new Claim("Email", userDTO.Email),
+                new Claim("Role",  userDTO.Role),
+                new Claim("CompanyName",userDTO.CustomerDTO.CompanyName),
+                new Claim("ContactName",userDTO.CustomerDTO.ContactName),
+                new Claim("ContactTitle",userDTO.CustomerDTO.ContactTitle),
+                new Claim("Address",userDTO.CustomerDTO.Address),
+                new Claim("PostalCode",userDTO.CustomerDTO.PostalCode),
+                new Claim("City",userDTO.CustomerDTO.City),
+                new Claim("Country",userDTO.CustomerDTO.Country),
+                new Claim("PhoneNumber",userDTO.CustomerDTO.PhoneNumber),
+               new Claim("CustomerId",userDTO.CustomerDTO.Id.ToString()),
             };
 
 

@@ -1,11 +1,13 @@
 ﻿using Application.DTOS.Customer;
 using Application.DTOS.Product;
 
-namespace Application.Profile
+namespace Application.Configuring.Profile
 {
+    using Application.DTOS;
     using Application.DTOS.Category;
     using AutoMapper;
     using Domain.DbSets;
+    using System.Runtime.ConstrainedExecution;
 
     public class MappingProfile : Profile
     {
@@ -17,9 +19,13 @@ namespace Application.Profile
                 .ReverseMap();
             CreateMap<CreateProductDTO, Product>().ReverseMap();
 
-            
 
 
+
+
+            CreateMap<User, UserDTO>().ReverseMap()
+                .ForMember(dest=>dest.Customer,opt=>opt.MapFrom(src=>src.CustomerDTO))
+                .ReverseMap();
 
 
         }

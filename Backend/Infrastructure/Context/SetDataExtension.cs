@@ -1,4 +1,5 @@
-﻿using Domain.DbSets;
+﻿using Domain;
+using Domain.DbSets;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Context
@@ -214,8 +215,9 @@ namespace Infrastructure.Context
             {
                 Id= 1,
                 CustomerId =1,
-
-
+                Email = "test@gmail.com",
+                Password="123451",
+                Role = SD.Customer
             });
         }
 

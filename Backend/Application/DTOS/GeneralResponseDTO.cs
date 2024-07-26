@@ -6,7 +6,5 @@ namespace Application.DTOS
     {
         public bool IsSucceded { get; init; }
         public string Message { get; set; } = string.Empty;
-
- 
     }
 }

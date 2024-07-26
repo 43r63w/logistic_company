@@ -6,14 +6,10 @@ using Application.DTOS;
 using Application.DTOS.AuthDTO;
 using Application.DTOS.Customer;
 using Application.IServices;
+using AutoMapper;
 using Domain;
 using Domain.DbSets;
-using FluentValidation;
 using Infrastructure.IGenericRepository;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Npgsql.Replication.PgOutput.Messages;
-using System.Buffers.Text;
 using System.Security.Cryptography;
 
 namespace Application.Services
@@ -22,13 +18,16 @@ namespace Application.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly JwtGenerator _jwtGenerator;
+        private readonly IMapper _mapper;
 
         public UserService(
             IUnitOfWork unitOfWork,
-            JwtGenerator jwtGenerator)
+            JwtGenerator jwtGenerator,
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _jwtGenerator = jwtGenerator;
+            _mapper = mapper;
         }
 
 
@@ -39,13 +38,25 @@ namespace Application.Services
 
             if (!result.IsValid)
                 throw new ConflictException("Email already taken");
-            
-            
+
+
+
+
             var newUser = new User
             {
                 Email = registerDto.Email,
                 Password = PasswordHash.HashPassword(registerDto.Password),
-                CustomerId = registerDto.CustomerId,
+                Customer = new Customer
+                {
+                    CompanyName = registerDto.Customer.CompanyName,
+                    ContactName = registerDto.Customer.ContactName,
+                    ContactTitle = registerDto.Customer.ContactTitle,
+                    Address = registerDto.Customer.Address,
+                    PostalCode = registerDto.Customer.PostalCode,
+                    City = registerDto.Customer.City,
+                    Country = registerDto.Customer.Country,
+                    PhoneNumber = registerDto.Customer.PhoneNumber,
+                },
                 Role = registerDto.Role,
                 IsHaveBan = false,
             };
@@ -67,7 +78,7 @@ namespace Application.Services
         {
             var validation = new LoginValidator(_unitOfWork);
             var result = await validation.ValidateAsync(loginDto);
-            
+
             if (!result.IsValid)
             {
                 throw new BadRequestException("Something went wrong", result.ToDictionary());
@@ -76,9 +87,29 @@ namespace Application.Services
             var fromDb = await _unitOfWork.UserRepository.GetAsync(e => e.Email.ToLower() == loginDto.Email.ToLower(),
             includeOptions: "Customer,Employee");
 
+            var userDto = new UserDTO
+            {
+                Id = fromDb.Id,
+                Email = fromDb.Email,
+                Role = fromDb.Role,
+                CustomerDTO = new CustomerDTO
+                {
+                    CompanyName = fromDb.Customer.CompanyName,
+                    ContactName = fromDb.Customer.ContactName,
+                    ContactTitle = fromDb.Customer.ContactTitle,
+                    Country = fromDb.Customer.Country,
+                    PhoneNumber = fromDb.Customer.PhoneNumber,
+                    Address = fromDb.Customer.Address,
+                    City = fromDb.Customer.City,
+                    PostalCode = fromDb.Customer.PostalCode,
+                    Id = fromDb.Customer.Id,
+                }
+            };
+
+
             return new LoginResponseDTO
             {
-                Token = _jwtGenerator.GenerateToken(fromDb.Email, fromDb.Role),
+                Token = _jwtGenerator.GenerateToken(userDto),
                 PasswordToken = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32))
             };
 
@@ -152,7 +183,7 @@ namespace Application.Services
                 IsSucceded = true,
                 Message = $"{getCustomer.User.Email} was unbanned"
             };
-            
+
         }
 
     }
